@@ -67,8 +67,14 @@ export default function Register() {
     }
 
     return (
-        <RegisterPresentational handleChangePassword={ handleChangePassword } handleChangeEmail={handleChangeEmail}
-        handleChangeConfirmPassword={ handleChangeConfirmPassword } handleSubmit={handleSubmit} name={name} 
-        handleChangeName={ handleChangeName } errors={errors} submited={submited} />
+        <RegisterPresentational 
+        errors={errors} 
+        handleChangeConfirmPassword={ handleChangeConfirmPassword } 
+        handleChangeEmail={handleChangeEmail}
+        handleChangeName={ handleChangeName } 
+        handleChangePassword={ handleChangePassword }
+        handleSubmit={handleSubmit} 
+        name={name} 
+        submited={submited} />
     )
 }

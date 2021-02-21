@@ -8,8 +8,8 @@ export default function Login() {
 
     const firebase = useRecoilValue(firebase_app)
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
     const [errors, setErrors] = useState({})
+    const [password, setPassword] = useState("")
     const [submited, setSubmited] = useState(false)
     const history = useHistory();
 
@@ -48,7 +48,11 @@ export default function Login() {
     }
 
     return (
-        <LoginPresentational handleChangePassword={ handleChangePassword } handleChangeEmail={handleChangeEmail}  
-        handleSubmit={handleSubmit} errors={errors} submited={submited}/>
+        <LoginPresentational 
+        errors={errors}
+        handleChangeEmail={handleChangeEmail}  
+        handleChangePassword={ handleChangePassword } 
+        handleSubmit={handleSubmit} 
+        submited={submited}/>
     )
 }

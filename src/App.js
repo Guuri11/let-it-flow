@@ -12,6 +12,7 @@ import Error404 from './components/pages/container/Error404';
 import { useRecoilState } from 'recoil';
 import { user_app } from './recoil/user';
 import Note from './components/pages/container/Note';
+import MarkdownGuide from './components/pages/container/MarkdownGuide';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
 			<Route exact path='/note/:id' component={()=> <Note/>} />
 			<Route exact path='/login' component={() => <Login/>}/>
 			<Route exact path='/register' component={() => <Register/>}/>
+			<Route exact path='/markdown-guide' component={() => <MarkdownGuide/>}/>
 			<Route parth="*" component={() => <Error404/> } />
 		</AnimatedSwitch>
   );

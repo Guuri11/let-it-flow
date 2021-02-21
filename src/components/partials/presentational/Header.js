@@ -1,20 +1,35 @@
 import React from 'react'
-import { IconButton, Switch } from 'ui-neumorphism'
+import { IconButton } from 'ui-neumorphism'
 import Icon from '@mdi/react';
-import { mdiLogout, mdiThemeLightDark } from "@mdi/js"
+import { mdiLogout, mdiThemeLightDark, mdiArrowLeftThick } from "@mdi/js"
+import { Link } from 'react-router-dom';
 
 
 export default function Header(props) {
 
-    const { logout, handleSwitchTheme, is_dark_mode } = props
+    const { logout, handleSwitchTheme, goBack } = props
 
     return (
-        <div className="row px-4">
-			<div className="offset-sm-6 offset-xs-4 col-sm-6 col-xs-8">
+        <div className="row py-4 px-2">
+			{
+				goBack ?
+				<div className="col-2">
+					<Link to={'/'}>
+						<IconButton>
+							<Icon path={mdiArrowLeftThick} size={2}></Icon>
+						</IconButton>
+					</Link>
+				</div>
+				:
+				null
+			}
+			<div className={goBack ? "offset-2 col-8" : "offset-6 col-6"}>
 				<IconButton rounded className="float-right" text={false} onClick={ logout }>
 					<Icon path={mdiLogout} size={1}></Icon>
 				</IconButton>
-				<Switch checked={is_dark_mode} label={<Icon path={mdiThemeLightDark} size={1} />} onChange={handleSwitchTheme} className="float-right" color='var(--primary)' />
+				<IconButton className="float-right mr-1" onClick={handleSwitchTheme} rounded> 
+					<Icon path={mdiThemeLightDark} size={1} />
+				</IconButton>
 			</div>
 		</div>
     )

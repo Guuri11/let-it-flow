@@ -32,7 +32,7 @@ const pageVariants = {
 export default function Register(props) {
 
   const { handleChangeEmail, handleChangePassword, 
-    handleChangeConfirmPassword, handleSubmit, errors, submited, name, handleChangeName } = props
+    handleChangeConfirmPassword, handleSubmit, errors, submited, handleChangeName } = props
 
     return (
         <motion.div 

@@ -3,33 +3,35 @@ import { Redirect } from 'react-router-dom'
 import ProfilePresentational from "../presentational/Profile"
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { user_app, name_app } from '../../../recoil/user';
+import { user_app, name_app, logout_app } from '../../../recoil/user';
 import { db_app } from '../../../recoil/firebase';
 import { voice_supported_app } from '../../../recoil/voice';
-import { notes_app } from '../../../recoil/note';
+import { notes_app, note_description_app, note_name_app } from '../../../recoil/note';
 
 
 export default function Profile() {
 
     // recoil
-    const db = useRecoilValue(db_app)
-    const user = useRecoilValue(user_app)
-    const name = useRecoilValue(name_app)
-    const voice_supported = useRecoilValue(voice_supported_app)
     const [notes, setNotes] = useRecoilState(notes_app)
+    const [note_name, setNoteName] = useRecoilState(note_name_app)
+    const [note_description, setNoteDescription] = useRecoilState(note_description_app)
+    const db = useRecoilValue(db_app)
+    const name = useRecoilValue(name_app)
+    const user = useRecoilValue(user_app)
+    const voice_supported = useRecoilValue(voice_supported_app)
+    const logout = useRecoilValue(logout_app)
 
     // states
-    const [note_name, setNoteName] = useState("")
-    const [note_description, setNoteDescription] = useState("")
+    const [error, setError] = useState({})
+    const [is_listening, setIsListening] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [note, setNote] = useState({})
+    const [reAnimate, setReAnimate] = useState(true)
     const [reload, setReload] = useState(false)
+    const [visible_show, setVisibleShow] = useState(false)
     const [visible, setVisible] = useState(false)
     const [visibleDelete, setVisibleDelete] = useState(false)
-    const [note, setNote] = useState({})
-    const [error, setError] = useState({})
-    const [loading, setLoading] = useState(true)
-    const [reAnimate, setReAnimate] = useState(true)
-    const [is_listening, setIsListening] = useState(false)
-    const [visible_show, setVisibleShow] = useState(false)
+
 
 
     useEffect(() => {
@@ -46,7 +48,7 @@ export default function Profile() {
                 setReAnimate(true)
             })
         }
-    },[reload, user])
+    },[reload, user, db, setNotes])
 
     /**
      * Change name state 
@@ -86,7 +88,7 @@ export default function Profile() {
     }
 
     const handleFav = (note) => {
-        let note_aux = note
+        let note_aux = Object.assign({}, note);
         note_aux.favorite = note.favorite  ? false : true
         db.collection("notes").doc(note.id).update(note_aux).then(()=>{
             setLoading(true)
@@ -209,6 +211,10 @@ export default function Profile() {
                 handleSearch({value: ""})
                 setIsListening(false)
             }
+        },
+        {
+            command: 'salir',         
+            callback: logout
         }
     ]
     
@@ -240,10 +246,10 @@ export default function Profile() {
         setVisibleShow={setVisibleShow}
         showNote={showNote}
         SpeechRecognition={SpeechRecognition}
+        visible_show={visible_show}
         visible={visible} 
         visibleDelete={visibleDelete} 
         voice_supported={voice_supported}
-        visible_show={visible_show}
         />
         )
 }

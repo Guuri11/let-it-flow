@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import { Tab, Tabs, TabItem, TabItems, Dialog, Caption, Body2, Button, Card, CardContent, 
-  CardHeader, H4, H5, TextField, TextArea, CardAction, IconButton } from 'ui-neumorphism'
+  CardHeader, H4, H5, TextField, TextArea, IconButton } from 'ui-neumorphism'
 import Icon from '@mdi/react';
-import { mdiPlus, mdiTrashCanOutline, mdiPencil, mdiMicrophone, mdiMicrophoneOff, mdiStar, mdiStarOutline } from "@mdi/js"
-import ReactMarkdown from 'react-markdown'
+import { mdiPlus, mdiMicrophone, mdiMicrophoneOff } from "@mdi/js"
 import {
   motion,
 } from "framer-motion"
-import MotionFigure from '../../partials/container/MotionFigure';
-import { Link } from 'react-router-dom';
 import Header from '../../partials/container/Header';
+import Note from '../../partials/container/Note';
 
 const pageVariants = {
     initial: {
@@ -38,8 +36,8 @@ const pageTransition = {
 export default function Profile(props) {
 
     const { error, handleChangeNoteDescription, handleChangeNoteName, handleDelete, handleFav, handleNewNote, handleSearch,is_listening, loading,
-			name, note, notes, openDelete, openNew, openNote, setIsListening, setVisible, setVisibleDelete, setVisibleShow, showNote, SpeechRecognition,
-			visible, visibleDelete, visible_show, voice_supported		
+			name, note, notes, openDelete, openNew, openNote, setIsListening, setVisible, setVisibleDelete, showNote, SpeechRecognition,
+			visible, visibleDelete, voice_supported		
 	} = props
 
   	const [active, setActive] = useState(0)
@@ -49,7 +47,7 @@ export default function Profile(props) {
 
 	const tabs = () => {
 		return (
-		<TabItems value={active} >
+		<TabItems value={active}>
 
 			{/* All notes */}
 			<TabItem>
@@ -57,39 +55,7 @@ export default function Profile(props) {
 				{
 					notes.map( (note,idx) =>{
 						delay += 0.2
-
-						const title_content = () => {
-							return (
-								<>
-									<div><Link to={`/note/${note.id}`}><ReactMarkdown className="w-100">{note.name}</ReactMarkdown></Link></div>
-									<Icon onClick={() => handleFav(note)} className="float-right" path={note.favorite ? mdiStar : mdiStarOutline} size={1} />
-								</>
-							)
-						}
-
-						return(
-							<motion.div
-							key={idx}
-							className="col-xs-12 col-sm-6 col-md-3"
-							>
-							<div>
-								<Card style={{margin: 5}}>
-								<CardHeader
-									title={<div className="d-flex justify-content-between" >{ title_content() }</div>}
-								/>
-								<CardAction className="d-none d-md-flex justify-content-center">
-									<IconButton rounded bgColor='var(--error)' className="m-2" text={false} onClick={()=> openDelete(note)}>
-									<Icon path={mdiTrashCanOutline} color='var(--white)' size={1}></Icon>
-									</IconButton>
-									<IconButton rounded bgColor='var(--success)' className="m-2" text={false} onClick={ ()=> openNote(note) }>
-									<Icon path={mdiPencil} color='var(--white)' size={1}></Icon>
-									</IconButton>
-								</CardAction>
-								<MotionFigure openNote={openNote} note={note} openDelete={openDelete} id={idx} />
-								</Card>
-							</div>
-							</motion.div>
-						)
+						return <Note key={idx} idx={idx} openNote={openNote} delay={delay} note={note} openDelete={openDelete} handleFav={handleFav} />
 					})
 				}
 				</div>
@@ -102,40 +68,8 @@ export default function Profile(props) {
 					notes.map( (note,idx) =>{
 						delay += 0.2
 						
-						if (note.favorite) {
-							const title_content = () => {
-								return (
-									<>
-										<div onClick={()=>showNote(note)}><ReactMarkdown className="w-100">{note.name}</ReactMarkdown></div>
-										<Icon onClick={() => handleFav(note)} className="float-right" path={note.favorite ? mdiStar : mdiStarOutline} size={1} />
-									</>
-								)
-							}
-		
-							return(
-								<motion.div
-								key={idx}
-								className="col-xs-12 col-sm-6 col-md-3"
-								>
-								<div>
-									<Card style={{margin: 5}}>
-									<CardHeader
-										title={<div className="d-flex" >{ title_content() }</div>}
-									/>
-									<CardAction className="d-none d-md-flex justify-content-center">
-										<IconButton rounded bgColor='var(--error)' className="m-2" text={false} onClick={()=> openDelete(note)}>
-										<Icon path={mdiTrashCanOutline} color='var(--white)' size={1}></Icon>
-										</IconButton>
-										<IconButton rounded bgColor='var(--success)' className="m-2" text={false} onClick={ ()=> openNote(note) }>
-										<Icon path={mdiPencil} color='var(--white)' size={1}></Icon>
-										</IconButton>
-									</CardAction>
-									<MotionFigure openNote={openNote} note={note} openDelete={openDelete} id={idx} />
-									</Card>
-								</div>
-								</motion.div>
-							)
-						}
+						if (note.favorite) 
+							return <Note key={idx} idx={idx} openNote={openNote} delay={delay} note={note} openDelete={openDelete} handleFav={handleFav} />
 					})
 				}
 				</div>
@@ -154,16 +88,16 @@ export default function Profile(props) {
 		exit="out"
 		variants={pageVariants}
 		transition={pageTransition}
-		className="container mt-3 h-100"
+		className="container"
 		>
 		<Header/>
 
-		<div className="p-4">
+		<div className="p-2">
 			<div className="row">
-			<div className="col-xs-12 col-sm-6">
+			<div className="col-sm-12 col-md-6">
 				<H4 >{name}</H4>
 			</div>
-			<div className="col-xs-12 offset-sm-2 col-sm-4">
+			<div className="col-sm-12 offset-md-2 col-md-4">
 				<TextField label="Search..." onChange={handleSearch} className="float-right float-none-xs w-100" inputStyles={{width: "100%"}} />
 			</div>
 			</div>
@@ -180,13 +114,13 @@ export default function Profile(props) {
 			}
 			
 			<div className="row mt-2">
-			<div className="col-xs-12 col-sm-6">
+			<div className="col-sm-12 col-md-6">
 			<Tabs value={active} onChange={({active})=>setActive(active)} >
 				<Tab>All</Tab>
 				<Tab>Favorites</Tab>
 			</Tabs>
 			</div>
-			<div className="col-xs-12 col-sm-6 d-none d-md-block">
+			<div className="col-sm-12 col-md-6 d-none d-md-block">
 				<Button rounded className="pt-0 float-right" size='large' onClick={openNew}>
 				<Icon path={mdiPlus} size={1}/> Add note
 				</Button>
@@ -258,29 +192,12 @@ export default function Profile(props) {
 					value={note.name}
 					/>
 					<Body2 className="mb-2">Description</Body2>
-					<TextArea style={{width: "100%"}} className="w-100" inputStyles={{width: "100%", maxHeight: 450}} height={150} autoExpand label='Text area'
+					<TextArea style={{width: "100%"}} className="w-100" inputStyles={{width: "100%", maxHeight: 450}} height={150} autoExpand label='Description'
 					onChange={handleChangeNoteDescription}
 					value={note.description}
 					/>
 					<Button className="w-100 mb-4w-100 mb-4" onClick={handleNewNote}>Save</Button>
 					</form>
-				</CardContent>
-			</Card>
-		</Dialog>
-
-		<Dialog
-			minWidth={300}
-			visible={visible_show}
-			onClose={()=> setVisibleShow(false)}
-			className="container"
-		>
-			
-			<Card className="p-2">
-				<CardHeader
-				title={<div onClick={()=>showNote(note)} ><ReactMarkdown>{note.name}</ReactMarkdown></div>}	/>
-
-				<CardContent style={{wordWrap: "break-word"}}>
-					<Body2><ReactMarkdown className="m-2">{ note.description }</ReactMarkdown></Body2>
 				</CardContent>
 			</Card>
 		</Dialog>
@@ -295,21 +212,29 @@ export default function Profile(props) {
 				title={<H5 className="text-center">Are you sure about delete "{ note.name }"?</H5>}
 			/>
 			<CardContent className="mt-4 d-flex justify-content-center py-2">
-				<Button className="m-2" rounded color='var(--white)' onClick={()=> setVisibleDelete(false)} bgColor='var(--error)'>Cancel</Button>
-				<Button className="m-2" rounded onClick={()=> {handleDelete(note.id); setVisibleDelete(false)}} >Delete</Button>
+				<Button className="m-2" rounded onClick={()=> setVisibleDelete(false)}>Cancel</Button>
+				<Button className="m-2" rounded onClick={()=> {handleDelete(note.id); setVisibleDelete(false)}} color='var(--white)' bgColor='var(--error)' >
+					Delete
+				</Button>
 			</CardContent>
 			</Card>
 		</Dialog>
 
 		</motion.div>
 
-		<div className="d-md-none add-new-mobile">
-		<IconButton rounded text={false} size="large" onClick={openNew} color='var(--success)'>
+		<motion.div className="d-md-none add-new-mobile"
+		whileHover={{ scale: 1.1 }}
+		whileTap={{ scale: 0.9 }}
+		>
+		<IconButton rounded text={false} size="large" onClick={openNew} color='var(--white)' bgColor='var(--success)'>
 			<Icon path={mdiPlus} size={1} />
 		</IconButton>
-		</div>
+		</motion.div>
 
-		<div className="d-md-none voice-mobile">
+		<motion.div className="d-md-none voice-mobile"
+		whileHover={{ scale: 1.1 }}
+		whileTap={{ scale: 0.9 }}
+		>
 		{
 		voice_supported ?
 			is_listening ?
@@ -323,7 +248,7 @@ export default function Profile(props) {
 			:
 			null
 		}
-		</div>
+		</motion.div>
 	</>
 	)
 }

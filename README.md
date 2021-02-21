@@ -18,6 +18,6 @@ All with a smooth and fast experience, thats the most important thing.
 - React Native (to do)
 
 #### Where can I try it?
-You can sign up free and try it in [https://let-it-flow.netlify.app](let-it-flow.netlify.app) !! 💯
+You can sign up free and try it in [let-it-flow.netlify.app](https://let-it-flow.netlify.app) !! 💯
 
 You can download in your phone too with the power of PWA.

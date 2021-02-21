@@ -17,8 +17,8 @@ export const dark_mode = selector({
 
 export const switch_theme_app = atom({
     key: 'switchTheme',
-    default: (e) => {
-        if (e.checked) {
+    default: (checked) => {
+        if (checked) {
 			document.documentElement.setAttribute('data-theme', 'dark');
   	      	localStorage.setItem('theme', 'dark');
   	  	}
