@@ -5,10 +5,13 @@ All notable changes to this project will be documented in this file.
 ##### Added
 - Implemented [Recoil JS](https://recoiljs.org/)
 - Specific page to show a note
+- Started Markdown Guide (no direct access)
+
 
 ##### Changed
 - Pattern structure cleaned
-- Some UI stuff
+- Fixed some bugs
+- UI improvements
 
 --------
 
