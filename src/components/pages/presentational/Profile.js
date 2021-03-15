@@ -83,7 +83,6 @@ export default function Profile(props) {
 
 	return (
 	<>
-		<Menu/>
 		<motion.div
 		initial="initial"
 		animate="in"
