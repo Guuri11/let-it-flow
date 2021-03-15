@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 ReactDOM.render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <RecoilRoot>
       <BrowserRouter>
       <Suspense fallback={<div></div>}>
@@ -16,7 +16,7 @@ ReactDOM.render(
       </Suspense>
       </BrowserRouter>
     </RecoilRoot> 
-  </React.StrictMode>
+  //</React.StrictMode>
   
   ,
   document.getElementById('root')

@@ -1,9 +1,7 @@
-import { mdiContentSaveEdit, mdiPencil } from '@mdi/js';
-import Icon from '@mdi/react';
 import { motion } from 'framer-motion';
 import React from 'react'
 import ReactMarkdown from 'react-markdown';
-import { H4, IconButton, TextArea } from 'ui-neumorphism';
+import { H4 } from 'ui-neumorphism';
 import Header from '../../partials/container/Header';
 
 

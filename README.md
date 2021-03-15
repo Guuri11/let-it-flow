@@ -7,9 +7,10 @@ I wanted to get many ways to interact with the notes with the basic CRUD so I co
 - Play with animations so the user can do some funcionalities with it.
 
 #### So is that all? 🤷‍♂️
-NO! The final idea is to convert Let it flow into a workspace app 💪💻 including kanban, reminders ...
+I have to say yes, that's all. The first idea was to build a workspace app as you can see in old commits. But I rather build different apps with other libraries and keep trying new & cool things.
+Now I have a solid note app with a cool UI/UX that brings me all what I needed to create my own notes.
 
-All with a smooth and fast experience, thats the most important thing.
+Any new feature will be focus on improving the app as a note app.
 
 #### What is it built with
 - React JS 

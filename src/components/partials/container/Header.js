@@ -7,11 +7,11 @@ import HeaderPresentational from '../presentational/Header'
 
 export default function Header(props) {
 
-    const switchTheme = useRecoilValue(switch_theme_app)
-    const logout = useRecoilValue(logout_app)
-    const is_dark_mode = useRecoilValue(dark_mode)
     const [checked, setChecked] = useState(false)
     const { goBack } = props
+    const is_dark_mode = useRecoilValue(dark_mode)
+    const logout = useRecoilValue(logout_app)
+    const switchTheme = useRecoilValue(switch_theme_app)
 
     /**
      * 
@@ -23,6 +23,13 @@ export default function Header(props) {
     }
 
     return (
-        <HeaderPresentational goBack={goBack !== undefined ? goBack:false} checked={checked} setChecked={setChecked} handleSwitchTheme={handleSwitchTheme} logout={logout} is_dark_mode={is_dark_mode} />
+        <HeaderPresentational 
+        checked={checked}
+        goBack={goBack !== undefined ? goBack:false} 
+        handleSwitchTheme={handleSwitchTheme} 
+        is_dark_mode={is_dark_mode}
+        logout={logout} 
+        setChecked={setChecked}
+         />
     )
 }

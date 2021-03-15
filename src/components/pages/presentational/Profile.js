@@ -8,6 +8,7 @@ import {
 } from "framer-motion"
 import Header from '../../partials/container/Header';
 import Note from '../../partials/container/Note';
+import Menu from '../container/Menu';
 
 const pageVariants = {
     initial: {
@@ -82,6 +83,7 @@ export default function Profile(props) {
 
 	return (
 	<>
+		<Menu/>
 		<motion.div
 		initial="initial"
 		animate="in"
@@ -91,7 +93,6 @@ export default function Profile(props) {
 		className="container"
 		>
 		<Header/>
-
 		<div className="p-2">
 			<div className="row">
 			<div className="col-sm-12 col-md-6">

@@ -8,8 +8,8 @@ import NotePresentational from '../presentational/Note'
 
 export default function Note() {
 
-    const [note, setNote] = useState(undefined)
     const [fromFirebase, setFromFirebase] = useState(false)
+    const [note, setNote] = useState(undefined)
     const { id } = useParams()
     const db = useRecoilValue(db_app)
     const notes = useRecoilValue(notes_app)

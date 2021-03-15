@@ -12,14 +12,14 @@ import { notes_app, note_description_app, note_name_app } from '../../../recoil/
 export default function Profile() {
 
     // recoil
-    const [notes, setNotes] = useRecoilState(notes_app)
-    const [note_name, setNoteName] = useRecoilState(note_name_app)
     const [note_description, setNoteDescription] = useRecoilState(note_description_app)
+    const [note_name, setNoteName] = useRecoilState(note_name_app)
+    const [notes, setNotes] = useRecoilState(notes_app)
     const db = useRecoilValue(db_app)
+    const logout = useRecoilValue(logout_app)
     const name = useRecoilValue(name_app)
     const user = useRecoilValue(user_app)
     const voice_supported = useRecoilValue(voice_supported_app)
-    const logout = useRecoilValue(logout_app)
 
     // states
     const [error, setError] = useState({})
